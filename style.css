@@ -70,5 +70,5 @@
 }
 
 .wrap .pic ul li div:nth-child(4) {
-	transform:translateZ(-180px)
+	transform:translateZ(-180px) rotateX(180deg)
 }
