@@ -5,13 +5,12 @@
 
 .wrap {
 	margin: 10%;
-	border: 1px solid red;
 }
 
 .wrap .pic {
 	height: 360px;
 	width: 800px;
-	perspective: 1500px;
+  perspective: 1500px;
 }
 
 .wrap .pic ul li {
@@ -21,15 +20,37 @@
 	float: left;
 	height: 360px;
 	transform-style: preserve-3d;
-	transition: 2s;
+	/* transition: 1s; */
 	transform: translateZ(-180px)
 }
 
-.wrap .pic ul li div {
+.wrap .pic ul li div:nth-child(1) {
 	position: absolute;
 	height: 360px;
-	width: 100%;
-	background-image: url('./images/bg.jpg')
+  width: 100%;
+  background-size: 800px 360px;
+	background-image: url('./images/1.jpg')
+}
+.wrap .pic ul li div:nth-child(2) {
+	position: absolute;
+	height: 360px;
+  width: 100%;
+  background-size: 800px 360px;
+	background-image: url('./images/2.jpg')
+}
+.wrap .pic ul li div:nth-child(3) {
+	position: absolute;
+	height: 360px;
+  width: 100%;
+  background-size: 800px 360px;
+	background-image: url('./images/3.jpg')
+}
+.wrap .pic ul li div:nth-child(4) {
+	position: absolute;
+	height: 360px;
+  width: 100%;
+  background-size: 800px 360px;
+	background-image: url('./images/4.jpg')
 }
 
 .wrap .pic ul li div:nth-child(1) {
@@ -50,8 +71,4 @@
 
 .wrap .pic ul li div:nth-child(4) {
 	transform:translateZ(-180px)
-}
-
-.wrap .pic ul li:hover {
-	transform: rotateX(180deg);
 }
