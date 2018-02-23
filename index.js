@@ -2,10 +2,10 @@
  * @Author: libin 
  * @Date: 2018-02-17 10:24:41 
  * @Last Modified by: libin
- * @Last Modified time: 2018-02-22 15:32:11
+ * @Last Modified time: 2018-02-23 10:36:31
  */
 
-function getElement(width, num, i) {
+function getElement (width, num, i) {
   var widthStr = -width * i + 'px'
   var element = document.createElement('li')
   element.style.width = width + 'px'
@@ -34,20 +34,7 @@ function getElement(width, num, i) {
 // 3.需要渲染的dom节点
 // 4.需要划分的条数
 //
-var dom = document.querySelector('.wrap')
-var clickCount = 0
-var options = {
-  // 参与展示的图片
-  pics: ['./images/1.jpg', './images/2.jpg', './images/3.jpg', './images/4.jpg'],
-  // 每张图片划分的块数 块数能把宽度整除
-  count: 50,
-  // 默认图片名称
-  defaultPicName: './images/empty.jpg',
-  // 所要展示的区域的宽度 优先从dom对象中提取
-  width: 400,
-  // 所要展示的区域的高度 优先从dom对象中提取
-  height: 180
-}
+
 var defaultOptions = {
   pics: [],
   // 每张图片划分的块数
@@ -56,11 +43,9 @@ var defaultOptions = {
   defaultPicName: 'empty.jpg'
 }
 class Banner {
-  constructor(dom, options) {
+  constructor (dom, options) {
     // 1.合并好配置文件
-    // dom.clientHeight && (options.height = dom.clientHeight)
-    // dom.clientWidth && (options.width = dom.clientWidth)
-    var useOption = _.extend(defaultOptions, options)
+    var useOption = Object.assign({}, defaultOptions, options)
     while (useOption.pics.length < 4) {
       useOption.pics.push(useOption.defaultPicName)
     }
@@ -89,7 +74,7 @@ class Banner {
     picElement.appendChild(ulElement)
     dom.appendChild(picElement)
   }
-  init() {
+  init () {
     var {
       count,
       width
@@ -99,16 +84,44 @@ class Banner {
     for (var i = 0; i < count; i++) {
       ulElement.appendChild(getElement(picWidth, count, i))
     }
-    document.querySelector('#but').addEventListener('click', () => {
-      var ulDom = document.querySelector('.pic-' + this.time + ' ul')
-      this.clickCount++
-        for (var i = 0; i < ulDom.children.length; i++) {
-          ulDom.children[i].style.transition = 0.8 + i / 80 + 's'
-          ulDom.children[i].style.transform = 'translateZ(-' + this.options.height / 2 + 'px) rotateX(' + (this.clickCount % 4) * 90 + 'deg)'
-        }
-    })
+  }
+  roll () {
+    var ulDom = document.querySelector('.pic-' + this.time + ' ul')
+    this.clickCount++
+    for (var i = 0; i < ulDom.children.length; i++) {
+      ulDom.children[i].style.transition = 0.8 + i / 80 + 's'
+      ulDom.children[i].style.transform = 'translateZ(-' + this.options.height / 2 + 'px) rotateX(' + (this.clickCount % 4) * 90 + 'deg)'
+    }
+  }
+  /**
+   * 获取自定义样式dom节点id
+   **/
+  getStyleDomId () {
+    return `diy-style-${this.time}`
+  }
+  /**
+   * 获取最终生效配置项
+   **/
+  getOptions () {
+    return this.options
   }
 }
 
-var banner = new Banner(dom, options)
+// 使用方调用
+var options = {
+  // 参与展示的图片
+  pics: ['./images/1.jpg', './images/2.jpg', './images/3.jpg', './images/4.jpg'],
+  // 每张图片划分的块数 块数能把宽度整除
+  count: 100,
+  // 默认图片名称
+  defaultPicName: './images/empty.jpg',
+  // 所要展示的区域的宽度 优先从dom对象中提取
+  width: 800,
+  // 所要展示的区域的高度 优先从dom对象中提取
+  height: 360
+}
+var banner = new Banner(document.querySelector('.wrap'), options)
 banner.init()
+document.querySelector('#but').addEventListener('click', function () {
+  banner.roll()
+})
