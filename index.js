@@ -118,7 +118,7 @@ var options = {
   // 所要展示的区域的宽度 优先从dom对象中提取
   width: 800,
   // 所要展示的区域的高度 优先从dom对象中提取
-  height: 360
+  height: 500
 }
 var banner = new Banner(document.querySelector('.wrap'), options)
 banner.init()
