@@ -5,7 +5,7 @@
  * @Last Modified time: 2018-02-23 10:36:31
  */
 
-function getElement (width, num, i) {
+function getElement(width, num, i) {
   var widthStr = -width * i + 'px'
   var element = document.createElement('li')
   element.style.width = width + 'px'
@@ -43,7 +43,7 @@ var defaultOptions = {
   defaultPicName: 'empty.jpg'
 }
 class Banner {
-  constructor (dom, options) {
+  constructor(dom, options) {
     // 1.合并好配置文件
     var useOption = Object.assign({}, defaultOptions, options)
     while (useOption.pics.length < 4) {
@@ -74,7 +74,7 @@ class Banner {
     picElement.appendChild(ulElement)
     dom.appendChild(picElement)
   }
-  init () {
+  init() {
     var {
       count,
       width
@@ -85,7 +85,7 @@ class Banner {
       ulElement.appendChild(getElement(picWidth, count, i))
     }
   }
-  roll () {
+  roll() {
     var ulDom = document.querySelector('.pic-' + this.time + ' ul')
     this.clickCount++
     for (var i = 0; i < ulDom.children.length; i++) {
@@ -96,13 +96,13 @@ class Banner {
   /**
    * 获取自定义样式dom节点id
    **/
-  getStyleDomId () {
+  getStyleDomId() {
     return `diy-style-${this.time}`
   }
   /**
    * 获取最终生效配置项
    **/
-  getOptions () {
+  getOptions() {
     return this.options
   }
 }
